@@ -53,9 +53,9 @@ void Map::blowMap()
 			// in case cell is black
 			if (getMatrixValue(i, j) == BLACK_RGB)
 			{
-				for(int k = 0; k <= numOfCells; k++)
+				for(int k = 0; k < numOfCells; k++)
 				{
-					for (int l = 0; l <= numOfCells; l++)
+					for (int l = 0; l < numOfCells; l++)
 					{
 						setMatrixColor(i + k, j + l);
 						setMatrixColor(i - k, j - l);
@@ -91,9 +91,9 @@ void Map::turnToGrid()
 		{
 			bool is_taken = false;
 
-			for(int k = 0; k <= numOfCells && !is_taken; k++)
+			for(int k = 0; k < numOfCells && !is_taken; k++)
 			{
-				for (int l = 0; l <= numOfCells && !is_taken; l++)
+				for (int l = 0; l < numOfCells && !is_taken; l++)
 				{
 					// in case the cell is black or grey.
 					if (getMatrixValue(i * numOfCells + k, j * numOfCells + l) != WHITE_RGB ||

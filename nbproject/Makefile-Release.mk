@@ -35,9 +35,16 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Manager.o \
 	${OBJECTDIR}/Map.o \
 	${OBJECTDIR}/MapSearchNode.o \
 	${OBJECTDIR}/PathPlanner.o \
+	${OBJECTDIR}/Plans/Plan.o \
+	${OBJECTDIR}/Plans/PlnObstacleAvoid.o \
+	${OBJECTDIR}/Robot.o \
+	${OBJECTDIR}/WayPointsManager.o \
+	${OBJECTDIR}/behaviors/Behavior.o \
+	${OBJECTDIR}/behaviors/TurnRight.o \
 	${OBJECTDIR}/lodepng.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/pngUtil.o
@@ -67,6 +74,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/Manager.o: Manager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Manager.o Manager.cpp
+
 ${OBJECTDIR}/Map.o: Map.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -81,6 +93,36 @@ ${OBJECTDIR}/PathPlanner.o: PathPlanner.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PathPlanner.o PathPlanner.cpp
+
+${OBJECTDIR}/Plans/Plan.o: Plans/Plan.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Plans
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/Plan.o Plans/Plan.cpp
+
+${OBJECTDIR}/Plans/PlnObstacleAvoid.o: Plans/PlnObstacleAvoid.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Plans
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/PlnObstacleAvoid.o Plans/PlnObstacleAvoid.cpp
+
+${OBJECTDIR}/Robot.o: Robot.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Robot.o Robot.cpp
+
+${OBJECTDIR}/WayPointsManager.o: WayPointsManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WayPointsManager.o WayPointsManager.cpp
+
+${OBJECTDIR}/behaviors/Behavior.o: behaviors/Behavior.cpp 
+	${MKDIR} -p ${OBJECTDIR}/behaviors
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/behaviors/Behavior.o behaviors/Behavior.cpp
+
+${OBJECTDIR}/behaviors/TurnRight.o: behaviors/TurnRight.cpp 
+	${MKDIR} -p ${OBJECTDIR}/behaviors
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/behaviors/TurnRight.o behaviors/TurnRight.cpp
 
 ${OBJECTDIR}/lodepng.o: lodepng.cpp 
 	${MKDIR} -p ${OBJECTDIR}

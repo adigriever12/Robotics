@@ -13,6 +13,10 @@
 #include <fstream>
 #include "Map.h"
 #include "PathPlanner.h"
+#include "WayPointsManager.h"
+#include "Robot.h"
+#include "Manager.h"
+#include "Plans/PlnObstacleAvoid.h"
 
 using namespace PlayerCc;
 using namespace std;
@@ -39,20 +43,38 @@ int main() {
 
 	vector<MapSearchNode*> nodes;
 	pathplanner.GetAStarNodes(nodes);
-
-	for(int i = 0; i < nodes.size(); i++)
+        
+        WayPointsManager waypointsmanager(nodes, &m);
+        
+        vector<MapSearchNode*> filtered_nodes;
+        waypointsmanager.GetWayPointNodes(filtered_nodes);
+        
+        Robot robot("localhost",6665);
+	PlnObstacleAvoid plnOA(&robot);
+	Manager manager(&robot, &plnOA);
+	manager.run();
+        
+        
+        for(int i = 0; i < nodes.size(); i++)
 	{
 		int x = nodes[i]->GetX();
 		int y = nodes[i]->GetY();
 		grid[x][y] = 7;
 	}
+        
+        for(int i = 0; i < filtered_nodes.size(); i++)
+	{
+		int x = filtered_nodes[i]->GetX();
+		int y = filtered_nodes[i]->GetY();
+		grid[x][y] = 5;
+	}
 
 	for(int i = 0; i < 95; i++)
-		{
-			for(int j = 0; j < 138; j++)
-			{
-				std::cout << grid[i][j] << std::flush;
-			}
-			std::cout << "\n" << std::flush;
-		}
+        {
+            for(int j = 0; j < 138; j++)
+            {
+		std::cout << grid[i][j] << std::flush;
+            }
+            std::cout << "\n" << std::flush;
+	}
 }

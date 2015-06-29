@@ -23,7 +23,7 @@ public:
 
     MapSearchNode(int x, int y, Map* map) {
         _map = map;
-		SetPosition(x, y);
+        SetPosition(x, y);
     }
 
     virtual ~MapSearchNode();
