@@ -27,9 +27,12 @@ public:
 	}
 	Behavior* selectNext()
 	{
-		//Run over vector and return first true
-		//startCond of the first behavior
-		return NULL;
+            for (int i = 0; i < _behVect.size(); i++)
+            {
+                if (_behVect[i]->startCond()) {
+                    return _behVect[i];
+                }
+            }
 	}
 
 };

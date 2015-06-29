@@ -23,13 +23,19 @@ public:
 		_pp->SetSpeed(xSpeed, angularSpeed);
 	}
 	bool isRightFree() {
-		if ((*_lp)[50] > 0.5)
+		if ((*_lp)[50] > 0.7 && (*_lp)[75] > 0.7 && (*_lp)[100] > 0.7)
+			return true;
+		else
+			return false;
+	}
+        bool isLeftFree() {
+		if ((*_lp)[615] > 0.7 && (*_lp)[590] > 0.7 && (*_lp)[565] > 0.7)
 			return true;
 		else
 			return false;
 	}
 	bool isForwardFree() {
-		if ((*_lp)[332] > 0.5)
+		if ((*_lp)[282] > 0.7 && (*_lp)[332] > 0.7 && (*_lp)[382] > 0.7)
 			return true;
 		else
 			return false;

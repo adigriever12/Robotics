@@ -8,13 +8,18 @@
 #ifndef PLNOBSTACLEAVOID_H_
 #define PLNOBSTACLEAVOID_H_
 #include "Plan.h"
+#include <vector>
+
+#include "Forward.h"
+#include "TurnLeft.h"
+#include "../behaviors/TurnRight.h"
 
 //#include "../behaviors/A.h"
 //#include "../behaviors/B.h"
 //#include "../behaviors/C.h"
 
 class PlnObstacleAvoid: public Plan {
-	Behavior* _beh[3];
+    vector<Behavior*> _behaviours;
 
 public:
 	PlnObstacleAvoid(Robot* robot);

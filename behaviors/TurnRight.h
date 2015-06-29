@@ -12,27 +12,25 @@
 
 class TurnRight: public Behavior {
 public:
-	TurnRight(Robot* robot);
-	bool startCond()
-	{
-		if(_robot->isRightFree() )
-			return true;
-		else
-			return false;
-	}
-	bool stopCond()
-	{
-		if(_robot->isForwardFree())
-					return true;
-				else
-					return false;
-	}
+    TurnRight(Robot* robot);
+        
+    bool startCond()
+    {
+        printf("right: %u\n", _robot->isRightFree());
+        return _robot->isRightFree();
+    }
 
-	void action()
-	{
-		_robot->setSpeed(0.0, 0.3);
-	}
-	virtual ~TurnRight();
+    bool stopCond()
+    {
+        return _robot->isForwardFree();
+    }
+
+    void action()
+    {
+        _robot->setSpeed(0.0, -0.2);
+    }
+
+    virtual ~TurnRight();
 };
 
 #endif /* TURNRIGHT_H_ */

@@ -39,8 +39,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/Map.o \
 	${OBJECTDIR}/MapSearchNode.o \
 	${OBJECTDIR}/PathPlanner.o \
+	${OBJECTDIR}/Plans/Forward.o \
 	${OBJECTDIR}/Plans/Plan.o \
 	${OBJECTDIR}/Plans/PlnObstacleAvoid.o \
+	${OBJECTDIR}/Plans/TurnLeft.o \
 	${OBJECTDIR}/Robot.o \
 	${OBJECTDIR}/WayPointsManager.o \
 	${OBJECTDIR}/behaviors/Behavior.o \
@@ -94,6 +96,11 @@ ${OBJECTDIR}/PathPlanner.o: PathPlanner.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PathPlanner.o PathPlanner.cpp
 
+${OBJECTDIR}/Plans/Forward.o: Plans/Forward.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Plans
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/Forward.o Plans/Forward.cpp
+
 ${OBJECTDIR}/Plans/Plan.o: Plans/Plan.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Plans
 	${RM} "$@.d"
@@ -103,6 +110,11 @@ ${OBJECTDIR}/Plans/PlnObstacleAvoid.o: Plans/PlnObstacleAvoid.cpp
 	${MKDIR} -p ${OBJECTDIR}/Plans
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/PlnObstacleAvoid.o Plans/PlnObstacleAvoid.cpp
+
+${OBJECTDIR}/Plans/TurnLeft.o: Plans/TurnLeft.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Plans
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/TurnLeft.o Plans/TurnLeft.cpp
 
 ${OBJECTDIR}/Robot.o: Robot.cpp 
 	${MKDIR} -p ${OBJECTDIR}
