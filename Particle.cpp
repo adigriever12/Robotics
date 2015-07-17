@@ -32,7 +32,7 @@ Particle* Particle::CreateChild(float dExpansionRadius, float dYawRange) {
 }
 
 void Particle::Update(float deltaX, float deltaY, float deltaYaw, Map* map, LaserProxy* lp) {
-	_dX += deltaX;
+        _dX += deltaX;
 	_dY += deltaY;
 	_dYaw += deltaYaw;
 	

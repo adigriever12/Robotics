@@ -46,11 +46,16 @@ void Manager::run(vector<MapSearchNode*> waypoints)
                 {
                     std::cout << "We have reached (" << x << ", " << y << "), moving to next WP!" << std::endl;
                     i++;
+                    
+                    _curr->setNextPoint(waypoints[i]->GetX(), waypoints[i]->GetY());
                 }
 
-                _curr = _curr->selectNext(waypoints[i]->GetX(), 
-                                          waypoints[i]->GetY());
-                                
+                if (!_curr->startCond())
+                {
+                    _curr = _curr->selectNext(waypoints[i]->GetX(), 
+                                              waypoints[i]->GetY());
+                }       
+                
                 _robot->ReadAndUpdateLocalization();
                 //}
             }
