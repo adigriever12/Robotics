@@ -13,7 +13,7 @@ Manager::Manager(Robot* robot, Plan* pln) {
 }
 void Manager::run(vector<MapSearchNode*> waypoints)
 {
-	_robot->Read();
+	_robot->ReadAndUpdateLocalization();
 	if(!(_curr->startCond()))
         {
             _curr = _curr->selectNext(waypoints[1]->GetX(), waypoints[1]->GetY());
@@ -39,7 +39,7 @@ void Manager::run(vector<MapSearchNode*> waypoints)
                 while(_curr->stopCond() == false)
                 {
                     _curr->action();
-                    _robot->Read();
+                    _robot->ReadAndUpdateLocalization();
                 }
 
                 if (_curr->isAtWaypoint(x, y))
@@ -51,7 +51,7 @@ void Manager::run(vector<MapSearchNode*> waypoints)
                 _curr = _curr->selectNext(waypoints[i]->GetX(), 
                                           waypoints[i]->GetY());
                                 
-                _robot->Read();
+                _robot->ReadAndUpdateLocalization();
                 //}
             }
 	}

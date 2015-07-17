@@ -42,6 +42,23 @@ public:
 			return _grid;
 		}
 
+        double GetPixelResolution() 
+        {
+            return MapResolutionCM;
+        }
+        
+        int GetMapWidth()
+        {
+            //return _grid_width;   
+            return 550;
+        }
+        
+        int GetMapHeight()
+        {
+            //return _grid_height;   
+            return 380;
+        }
+        
 	Map(char* mapname);
 	virtual ~Map();
 	int getMatrixValue(int row, int col);

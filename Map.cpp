@@ -44,7 +44,7 @@ void Map::setMatrixColor(int row, int col)
 void Map::blowMap()
 {
 	// dividing by half the robot size
-	double numOfCells = robotSize / 2 / MapResolutionCM;
+	double numOfCells = (robotSize / 2 / MapResolutionCM) + 5;
 
 	for(int i = 0; i < _height; i++)
 	{

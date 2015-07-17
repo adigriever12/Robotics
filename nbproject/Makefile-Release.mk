@@ -35,9 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/LocalizationManager.o \
 	${OBJECTDIR}/Manager.o \
 	${OBJECTDIR}/Map.o \
 	${OBJECTDIR}/MapSearchNode.o \
+	${OBJECTDIR}/Particle.o \
 	${OBJECTDIR}/PathPlanner.o \
 	${OBJECTDIR}/Plans/Forward.o \
 	${OBJECTDIR}/Plans/Plan.o \
@@ -76,6 +78,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/LocalizationManager.o: LocalizationManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LocalizationManager.o LocalizationManager.cpp
+
 ${OBJECTDIR}/Manager.o: Manager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -90,6 +97,11 @@ ${OBJECTDIR}/MapSearchNode.o: MapSearchNode.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapSearchNode.o MapSearchNode.cpp
+
+${OBJECTDIR}/Particle.o: Particle.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Particle.o Particle.cpp
 
 ${OBJECTDIR}/PathPlanner.o: PathPlanner.cpp 
 	${MKDIR} -p ${OBJECTDIR}

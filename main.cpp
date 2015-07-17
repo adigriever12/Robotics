@@ -24,7 +24,7 @@ using namespace std;
 int main() {
 
 	//Map m("/home/colman/Desktop/hospital_section.png");
-
+        srand (time(NULL));
 	Map m("/home/colman/Desktop/roboticLabMap.png");
 	m.blowMap();
 
@@ -52,11 +52,18 @@ int main() {
         for (int blat = 0; blat < filtered_nodes.size(); blat++)
             printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
         
-        Robot robot("localhost",6665);
-	PlnObstacleAvoid plnOA(&robot);
-	Manager manager(&robot, &plnOA);
-	manager.run(filtered_nodes);
         
+
+        LocalizationManager localization(&m);
+        
+        Robot robot("localhost",6665, &localization);
+	PlnObstacleAvoid plnOA(&robot);
+        
+        robot.SetOdometryByPixelCoord(362, 305, 20,
+				m.GetPixelResolution(), m.GetMapWidth(), m.GetMapHeight());
+        
+        Manager manager(&robot, &plnOA);
+	manager.run(filtered_nodes);
         
         for(int i = 0; i < nodes.size(); i++)
 	{
@@ -71,7 +78,7 @@ int main() {
 		int y = filtered_nodes[i]->GetY();
 		grid[y][x] = 5;
 	}
-
+//
 //	for(int i = 0; i < 95; i++)
 //        {
 //            for(int j = 0; j < 138; j++)
