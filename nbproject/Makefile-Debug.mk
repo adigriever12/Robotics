@@ -46,6 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Plans/PlnObstacleAvoid.o \
 	${OBJECTDIR}/Plans/TurnLeft.o \
 	${OBJECTDIR}/Robot.o \
+	${OBJECTDIR}/SDL2Wrapper.o \
 	${OBJECTDIR}/WayPointsManager.o \
 	${OBJECTDIR}/behaviors/Behavior.o \
 	${OBJECTDIR}/behaviors/TurnRight.o \
@@ -68,7 +69,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lplayerc++
+LDLIBSOPTIONS=-lplayerc++ `pkg-config --libs SDL2_image` `pkg-config --libs sdl2`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -81,87 +82,92 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo: ${OBJECTFILES}
 ${OBJECTDIR}/LocalizationManager.o: LocalizationManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LocalizationManager.o LocalizationManager.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LocalizationManager.o LocalizationManager.cpp
 
 ${OBJECTDIR}/Manager.o: Manager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Manager.o Manager.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Manager.o Manager.cpp
 
 ${OBJECTDIR}/Map.o: Map.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Map.o Map.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Map.o Map.cpp
 
 ${OBJECTDIR}/MapSearchNode.o: MapSearchNode.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapSearchNode.o MapSearchNode.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapSearchNode.o MapSearchNode.cpp
 
 ${OBJECTDIR}/Particle.o: Particle.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Particle.o Particle.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Particle.o Particle.cpp
 
 ${OBJECTDIR}/PathPlanner.o: PathPlanner.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PathPlanner.o PathPlanner.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PathPlanner.o PathPlanner.cpp
 
 ${OBJECTDIR}/Plans/Forward.o: Plans/Forward.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Plans
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/Forward.o Plans/Forward.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/Forward.o Plans/Forward.cpp
 
 ${OBJECTDIR}/Plans/Plan.o: Plans/Plan.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Plans
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/Plan.o Plans/Plan.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/Plan.o Plans/Plan.cpp
 
 ${OBJECTDIR}/Plans/PlnObstacleAvoid.o: Plans/PlnObstacleAvoid.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Plans
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/PlnObstacleAvoid.o Plans/PlnObstacleAvoid.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/PlnObstacleAvoid.o Plans/PlnObstacleAvoid.cpp
 
 ${OBJECTDIR}/Plans/TurnLeft.o: Plans/TurnLeft.cpp 
 	${MKDIR} -p ${OBJECTDIR}/Plans
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/TurnLeft.o Plans/TurnLeft.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Plans/TurnLeft.o Plans/TurnLeft.cpp
 
 ${OBJECTDIR}/Robot.o: Robot.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Robot.o Robot.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Robot.o Robot.cpp
+
+${OBJECTDIR}/SDL2Wrapper.o: SDL2Wrapper.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SDL2Wrapper.o SDL2Wrapper.cpp
 
 ${OBJECTDIR}/WayPointsManager.o: WayPointsManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WayPointsManager.o WayPointsManager.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WayPointsManager.o WayPointsManager.cpp
 
 ${OBJECTDIR}/behaviors/Behavior.o: behaviors/Behavior.cpp 
 	${MKDIR} -p ${OBJECTDIR}/behaviors
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/behaviors/Behavior.o behaviors/Behavior.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/behaviors/Behavior.o behaviors/Behavior.cpp
 
 ${OBJECTDIR}/behaviors/TurnRight.o: behaviors/TurnRight.cpp 
 	${MKDIR} -p ${OBJECTDIR}/behaviors
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/behaviors/TurnRight.o behaviors/TurnRight.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/behaviors/TurnRight.o behaviors/TurnRight.cpp
 
 ${OBJECTDIR}/lodepng.o: lodepng.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lodepng.o lodepng.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/lodepng.o lodepng.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/pngUtil.o: pngUtil.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/pngUtil.o pngUtil.cpp
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/pngUtil.o pngUtil.cpp
 
 # Subprojects
 .build-subprojects:

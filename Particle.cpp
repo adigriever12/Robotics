@@ -31,15 +31,16 @@ Particle* Particle::CreateChild(float dExpansionRadius, float dYawRange) {
 	return new Particle(newX, newY, newYaw, 1);
 }
 
-void Particle::Update(float deltaX, float deltaY, float deltaYaw, Map* map, LaserProxy* lp) {
+void Particle::Update(float deltaX, float deltaY, float deltaYaw, Map* map,SDL2Wrapper* sdl, LaserProxy* lp) {
         _dX += deltaX;
 	_dY += deltaY;
 	_dYaw += deltaYaw;
 	
 	// Calculate new belif value from prediction belif, laser scan and the belif magic number
 	float predictionBelif = ProbabilityByMovement(deltaX, deltaY, deltaYaw) * _dBel;
-	float probabilityByScan = ProbabilityByLaserScan(_dX, _dY, _dYaw, map, lp);
+	float probabilityByScan = ProbabilityByLaserScan(_dX, _dY, _dYaw, map, sdl, lp, false);
 	_dBel = probabilityByScan * predictionBelif * BELIF_MAGIC_NUMBER;
+        //_dBel = predictionBelif * BELIF_MAGIC_NUMBER;
 	
 	if (_dBel > 1)
 		_dBel = 1;
@@ -102,7 +103,7 @@ float Particle::ProbabilityByMovement(float deltaX, float deltaY, float deltaYaw
 	return 0.1;
 }
 
-float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map, LaserProxy* lp) {
+float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map, SDL2Wrapper* sdl, LaserProxy* lp, bool shouldDraw) {
 	// Convert relative obstacle position to our valid map position
 	float resolution = (map->GetPixelResolution()) / 100;
 	float mapWidth = map->GetMapWidth();
@@ -117,13 +118,15 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 	// Check if current position is a valid position before continue
 	if (x < 0 || (x) >= map->GetMapWidth() ||
 			y < 0 || (y) >= map->GetMapHeight()) {
-		return 0;
+            printf("Oops! out of bound! (%f, %f)\n", x, y);
+            return 0;
 	}
         
 	int** grid = map->GetGrid();
 	
-        if (grid[yCoord][xCoord] != 0)
+        if (grid[yCoord][xCoord] == 1)
         {
+            printf("obstacle ahead! at (%u, %u) with value:%u\n", yCoord, xCoord, grid[yCoord][xCoord]);
             return 0;
         }
         
@@ -160,12 +163,18 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
                         
                         if (grid[yCoord][xCoord] != 0)
                         {
+                            if (shouldDraw) {
+					sdl->DrawPoint(dObstacleX, dObstacleY, GREEN_RGB_FORMAT, 255);
+				}
 //                            printf("Correct hits incremented %f ->", correctHits);
                             correctHits++;
 //                            printf("%f\n", correctHits);
                         }
                         else
                         {
+                            if (shouldDraw) {
+					sdl->DrawPoint(dObstacleX, dObstacleY, RED_RGB_FORMAT, 255);
+				}
 //                            printf("Oh noes, no hit at (%u, %u)\n", xCoord, yCoord);
                         }
 		}
@@ -174,6 +183,10 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 	float accuracy = correctHits / totalHits;
 //	printf("Particle accuracy: %f\n", accuracy);
 	return accuracy;
+}
+
+void Particle::DrawLaserScan(Map* map, SDL2Wrapper* sdl, LaserProxy* lp) {
+	ProbabilityByLaserScan(GetX(), GetY(), GetYaw(), map, sdl, lp, true);
 }
 
 void Particle::IncreaseAge() {

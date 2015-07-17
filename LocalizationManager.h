@@ -15,11 +15,13 @@ using namespace std;
 #include "Particle.h"
 #include "Map.h"
 #include "Convert.h"
+#include "Debug.h"
 
 class LocalizationManager {
 	Map* _map;
 	vector<Particle*> _particles;
-	
+	SDL2Wrapper* _sdl;
+        
 	/*
 	 * This position is the last known best particle, just in case the entire
 	 * particles vector is empty we will create new particle from this position.
@@ -35,7 +37,7 @@ class LocalizationManager {
 	// Transfer childs vector to the main particles vector as new future parents
 	void TransferChildsToParticles(vector<Particle*> childs);
 public:
-	LocalizationManager(Map* map);
+	LocalizationManager(Map* map, SDL2Wrapper* sdl);
 	virtual ~LocalizationManager();
 	
 	// Update all particles with new position and breed or kill if necessary

@@ -7,9 +7,10 @@
 
 #include "Manager.h"
 
-Manager::Manager(Robot* robot, Plan* pln) {
+Manager::Manager(Robot* robot, Plan* pln, SDL2Wrapper* sdl) {
 	_robot = robot;
 	_curr = pln->getStartPoint();
+        _sdl = sdl;
 }
 void Manager::run(vector<MapSearchNode*> waypoints)
 {
@@ -40,6 +41,7 @@ void Manager::run(vector<MapSearchNode*> waypoints)
                 {
                     _curr->action();
                     _robot->ReadAndUpdateLocalization();
+                    _sdl->FlushChanges();
                 }
 
                 if (_curr->isAtWaypoint(x, y))

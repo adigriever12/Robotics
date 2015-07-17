@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "SDL2Wrapper.h"
+#include "Debug.h"
 using namespace std;
 
 #include "Map.h"
@@ -48,7 +50,7 @@ class Particle {
 	
 	float Randomize(float dMin, float dMax);
 	float ProbabilityByMovement(float deltaX, float deltaY, float deltaYaw);
-	float ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map, LaserProxy* lp);
+	float ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map, SDL2Wrapper* sdl, LaserProxy* lp, bool shouldDraw);
 	
 public:
 	Particle(float dX, float dY, float dYaw, float dBel);
@@ -56,8 +58,9 @@ public:
 	
 	Particle* CreateChild();
 	Particle* CreateChild(float dExpansionRadius, float dYawRange);
-	void Update(float dX, float dY, float dYaw, Map* map, LaserProxy* lp);
-	
+	void Update(float dX, float dY, float dYaw, Map* map, SDL2Wrapper* sdl, LaserProxy* lp);
+	void DrawLaserScan(Map* map, SDL2Wrapper* sdl, LaserProxy* lp);
+        
 	float GetX();
 	float GetY();
 	float GetYaw();

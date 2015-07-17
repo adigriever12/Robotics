@@ -7,18 +7,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/behaviors/Behavior.h</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/Manager.cpp</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/Particle.cpp</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/WayPointsManager.cpp</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/Map.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Particle.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/PlnObstacleAvoid.h</file>
             <file>file:/home/colman/NetBeansProjects/robotics-demo/Robot.h</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/behaviors/TurnRight.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Robot.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/LocalizationManager.h</file>
             <file>file:/home/colman/NetBeansProjects/robotics-demo/main.cpp</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/WayPointsManager.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/LocalizationManager.cpp</file>
             <file>file:/home/colman/NetBeansProjects/robotics-demo/Particle.h</file>
-            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/Forward.h</file>
             <file>file:/home/colman/NetBeansProjects/robotics-demo/Map.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Manager.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/behaviors/Behavior.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/SDL2Wrapper.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/Plan.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Map.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/SDL2Wrapper.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/Plan.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/PlnObstacleAvoid.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/behaviors/TurnRight.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/lodepng.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/Forward.h</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/PathPlanner.cpp</file>
+            <file>file:/home/colman/NetBeansProjects/robotics-demo/Plans/TurnLeft.h</file>
         </group>
     </open-files>
 </project-private>

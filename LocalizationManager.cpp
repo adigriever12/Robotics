@@ -8,9 +8,10 @@
 #include "LocalizationManager.h"
 #include <ctime>
 
-LocalizationManager::LocalizationManager(Map* map) {
+LocalizationManager::LocalizationManager(Map* map,  SDL2Wrapper* sdl) {
 	_map = map;
-	
+	_sdl = sdl;
+        
 	_dX = _dY = _dYaw = 0;
 }
 
@@ -33,7 +34,7 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 		
 		// Get each particle and update position
 		Particle* particle = _particles[i];
-		particle->Update(deltaX, deltaY, deltaYaw, _map, lp);
+		particle->Update(deltaX, deltaY, deltaYaw, _map,_sdl, lp);
 		
 		float belif = particle->GetBelif();
 		
@@ -43,6 +44,9 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
                         printf("Particle <%f, %f, %f> belief %f\n", particle->GetX(), particle->GetY(), particle->GetYaw(), particle->GetBelif());
 			if (particle->IsDead() || belif <= 0) {
                             printf("So much death\n");
+                            //PlayerClient* pc = new PlayerClient("localhost",6665);
+                            //Position2dProxy* pp = new Position2dProxy(pc);
+                            //pp->SetSpeed(0, 0);
 				childsToRemove.push_back(i);				
 			}
 		} else if (belif >= HIGH_BELIF_THRESHOLD &&
@@ -67,6 +71,34 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 	if (childsToAdd.size() > 0) {
 		TransferChildsToParticles(childsToAdd);
 	}
+        
+        Particle* bestParticle;
+#ifdef DRAW_PARTICLES
+	bestParticle = GetBestParticle();
+	for (int i=0; i<_particles.size(); i++) {
+		Particle* particle = _particles[i];
+		float dX = Convert::RobotRelativeXPosToPixelXCoord(particle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
+		float dY = Convert::RobotRelativeYPosToPixelYCoord(particle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
+		if (particle->GetX() == bestParticle->GetX() &&
+				particle->GetY() == bestParticle->GetY() &&
+				particle->GetYaw() == bestParticle->GetYaw() &&
+				particle->GetBelif() == bestParticle->GetBelif()) {
+			continue;
+		}
+		
+//		_sdl->FillRectangle(dX, dY, (double)(_map->GetGridResolution() / _map->GetPixelResolution()), PURPLE_RGB_FORMAT, 255, false);
+		_sdl->DrawPoint(dX, dY, PURPLE_RGB_FORMAT, 255);
+	}
+	
+	float dX = Convert::RobotRelativeXPosToPixelXCoord(bestParticle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
+	float dY = Convert::RobotRelativeYPosToPixelYCoord(bestParticle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
+	_sdl->FillRectangle(dX, dY, (double)(4), RED_RGB_FORMAT, 255, false);
+#endif
+	
+#ifdef DRAW_BEST_LASER_SCAN
+	bestParticle = GetBestParticle();
+	bestParticle->DrawLaserScan(_map, _sdl, lp);
+#endif
 }
 
 bool LocalizationManager::CreateParticle(float dX, float dY, float dYaw, float dBel) {

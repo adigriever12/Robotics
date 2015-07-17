@@ -52,9 +52,12 @@ int main() {
         for (int blat = 0; blat < filtered_nodes.size(); blat++)
             printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
         
+        SDL2Wrapper sdl;
+	sdl.CreateWindow("World Map", m.GetMapWidth(), m.GetMapHeight());
         
+        sdl.LoadBackground("/home/colman/Desktop/roboticLabMap2.png", true);
 
-        LocalizationManager localization(&m);
+        LocalizationManager localization(&m, &sdl);
         
         Robot robot("localhost",6665, &localization);
 	PlnObstacleAvoid plnOA(&robot);
@@ -62,7 +65,7 @@ int main() {
         robot.SetOdometryByPixelCoord(362, 305, 20,
 				m.GetPixelResolution(), m.GetMapWidth(), m.GetMapHeight());
         
-        Manager manager(&robot, &plnOA);
+        Manager manager(&robot, &plnOA, &sdl);
 	manager.run(filtered_nodes);
         
         for(int i = 0; i < nodes.size(); i++)
