@@ -16,9 +16,7 @@ PlnObstacleAvoid::PlnObstacleAvoid(Robot* robot) : Plan(robot)
     forward->addBeh(right);
     forward->addBeh(left);
     left->addBeh(forward);
-    left->addBeh(right);
     right->addBeh(forward);
-    right->addBeh(left);
     
     _behaviours.push_back(forward);
     _behaviours.push_back(left);

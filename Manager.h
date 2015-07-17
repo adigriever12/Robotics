@@ -9,13 +9,14 @@
 #define MANAGER_H_
 #include "Plans/PlnObstacleAvoid.h"
 #include "Robot.h"
+#include "MapSearchNode.h"
 
 class Manager {
 	Behavior* _curr;
 	Robot* _robot;
 public:
 	Manager(Robot* robot, Plan* pln);
-	void run();
+	void run(vector<MapSearchNode*> waypoints);
 	virtual ~Manager();
 };
 

@@ -20,7 +20,7 @@ WayPointsManager::~WayPointsManager() {
 
 void WayPointsManager::GetWayPointNodes(vector<MapSearchNode*> &filtered_nodes) {
     
-    MapSearchNode* node = new MapSearchNode(_nodes[0]->GetX(), _nodes[0]->GetY(), _map);
+    MapSearchNode* node = new MapSearchNode(_nodes[0]->GetY(), _nodes[0]->GetX(), _map);
     filtered_nodes.push_back(node);
     
     for (int i = 0; i < _nodes.size() - 2; i++)
@@ -43,12 +43,14 @@ void WayPointsManager::GetWayPointNodes(vector<MapSearchNode*> &filtered_nodes) 
         
         if (result1 != result2)
         {
-            MapSearchNode* node = new MapSearchNode(_nodes[i + 1]->GetX(), _nodes[i + 1]->GetY(), _map);
+            MapSearchNode* node = new MapSearchNode(_nodes[i + 1]->GetY(),_nodes[i + 1]->GetX(), _map);
             filtered_nodes.push_back(node);
         }
         
-        // add last node
-        MapSearchNode* node = new MapSearchNode(_nodes[_nodes.size() - 1]->GetX(), _nodes[_nodes.size() - 1]->GetY(), _map);
-        filtered_nodes.push_back(node);
+        
     }
+    
+    // add last node
+    MapSearchNode* node1 = new MapSearchNode(_nodes[_nodes.size() - 1]->GetY(), _nodes[_nodes.size() - 1]->GetX(),_map);
+    filtered_nodes.push_back(node1);
 }

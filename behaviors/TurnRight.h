@@ -16,13 +16,14 @@ public:
         
     bool startCond()
     {
-        printf("right: %u\n", _robot->isRightFree());
-        return _robot->isRightFree();
+        printf("right is free: %u right cost: %f\n", _robot->isRightFree(), calc_right_cost());
+        double cost = calc_right_cost();
+        return ((_robot->isRightFree()) && (abs(cost) < M_PI) && (abs(cost) > (M_PI / 48)));
     }
 
     bool stopCond()
     {
-        return _robot->isForwardFree();
+        return !startCond();
     }
 
     void action()

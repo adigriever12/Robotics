@@ -13,6 +13,10 @@ Robot::Robot(char* ip, int port) {
 	_lp = new LaserProxy(_pc);
 
 	_pp->SetMotorEnable(true);
+        
+        _pp->SetOdometry(2.175, -2.875, ((20 * M_PI) / 180));
+        
+        
 	//For fixing Player's reading BUG
 	for(int i=0;i<15;i++)
 		Read();

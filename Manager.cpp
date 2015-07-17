@@ -11,21 +11,49 @@ Manager::Manager(Robot* robot, Plan* pln) {
 	_robot = robot;
 	_curr = pln->getStartPoint();
 }
-void Manager::run()
+void Manager::run(vector<MapSearchNode*> waypoints)
 {
 	_robot->Read();
 	if(!(_curr->startCond()))
-		return;
-	_curr->action();
+        {
+            _curr = _curr->selectNext(waypoints[1]->GetX(), waypoints[1]->GetY());
+            
+            if (_curr->stopCond())
+                return;
+        }
+	//	return;
+        int i = 1;
+        
+	//_curr->action();
 	while(_curr !=NULL)
 	{
-		while(_curr->stopCond() == false)
-		{
-			_curr->action();
-			_robot->Read();
-		}
-		_curr = _curr->selectNext();
-		_robot->Read();
+        
+//            for (int i = 1; i < waypoints.size() - 1; i++)
+            {
+                int x = waypoints[i]->GetX();
+                int y = waypoints[i]->GetY();
+                _curr->setNextPoint(x, y);
+                
+                //while (!_robot->isAtWayPoint(x, y))
+                //{
+                while(_curr->stopCond() == false)
+                {
+                    _curr->action();
+                    _robot->Read();
+                }
+
+                if (_curr->isAtWaypoint(x, y))
+                {
+                    std::cout << "We have reached (" << x << ", " << y << "), moving to next WP!" << std::endl;
+                    i++;
+                }
+
+                _curr = _curr->selectNext(waypoints[i]->GetX(), 
+                                          waypoints[i]->GetY());
+                                
+                _robot->Read();
+                //}
+            }
 	}
 }
 

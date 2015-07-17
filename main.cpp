@@ -49,10 +49,13 @@ int main() {
         vector<MapSearchNode*> filtered_nodes;
         waypointsmanager.GetWayPointNodes(filtered_nodes);
         
+        for (int blat = 0; blat < filtered_nodes.size(); blat++)
+            printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
+        
         Robot robot("localhost",6665);
 	PlnObstacleAvoid plnOA(&robot);
 	Manager manager(&robot, &plnOA);
-	manager.run();
+	manager.run(filtered_nodes);
         
         
         for(int i = 0; i < nodes.size(); i++)
@@ -66,15 +69,15 @@ int main() {
 	{
 		int x = filtered_nodes[i]->GetX();
 		int y = filtered_nodes[i]->GetY();
-		grid[x][y] = 5;
+		grid[y][x] = 5;
 	}
 
-	for(int i = 0; i < 95; i++)
-        {
-            for(int j = 0; j < 138; j++)
-            {
-		std::cout << grid[i][j] << std::flush;
-            }
-            std::cout << "\n" << std::flush;
-	}
+//	for(int i = 0; i < 95; i++)
+//        {
+//            for(int j = 0; j < 138; j++)
+//            {
+//		std::cout << grid[i][j] << std::flush;
+//            }
+//            std::cout << "\n" << std::flush;
+//	}
 }
