@@ -1,10 +1,3 @@
-/* 
- * File:   SlamManager.h
- * Author: colman
- *
- * Created on June 12, 2015, 12:43 PM
- */
-
 #ifndef LOCALIZATIONMANAGER_H
 #define	LOCALIZATIONMANAGER_H
 
@@ -22,21 +15,23 @@ class LocalizationManager {
 	vector<Particle*> _particles;
 	SDL2Wrapper* _sdl;
         
-	/*
-	 * This position is the last known best particle, just in case the entire
-	 * particles vector is empty we will create new particle from this position.
-	 */
-	float _dX;
-	float _dY;
-	float _dYaw;
+	float _X_delta;
+	float _Y_delta;
+	float _Yaw_delta;
 	
+        // Transfer childs vector to the main particles vector as new future parents
+	void ChildsToParticles(vector<Particle*> childs);
+        
 	// Fill in the childs vector with new childs from the parent particle
 	void BreedParticle(Particle* particle, int dwChildCount, vector<Particle*>& childs);
 	void BreedParticle(Particle* particle, int dwChildCount, float dExpansionRadius, float dYawRange, vector<Particle*>& childs);
 	
-	// Transfer childs vector to the main particles vector as new future parents
-	void TransferChildsToParticles(vector<Particle*> childs);
+	
 public:
+           // Create new particle and breed him with max childs count
+	bool CreateParticle(float X_delta, float Y_delta, float Yaw_delta, float Belief);
+	bool CreateParticle(float X_delta, float Y_delta, float Yaw_delta, float Belief, float Expansion_Radius, float Yaw_Range, int childsCount);
+
 	LocalizationManager(Map* map, SDL2Wrapper* sdl);
 	virtual ~LocalizationManager();
 	
@@ -44,12 +39,9 @@ public:
 	void Update(float deltaX, float deltaY, float deltaYaw, LaserProxy* lp);
 	
 	// Get the best particle that represent the actual robot position
-	Particle* GetBestParticle();
+	Particle* BestParticle();
 	
-	// Create new particle and breed him with max childs count
-	bool CreateParticle(float dX, float dY, float dYaw, float dBel);
-	bool CreateParticle(float dX, float dY, float dYaw, float dBel, float dExpansionRadius, float dYawRange, int childsCount);
-private:
+	private:
 
 };
 

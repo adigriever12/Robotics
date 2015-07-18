@@ -69,7 +69,7 @@ void Robot::UpdateLocalization() {
 	 * best particle to use as our real position
 	 */
 	_localization->Update(deltaX, deltaY, deltaYaw, _lp);
-	Particle* particle = _localization->GetBestParticle();
+	Particle* particle = _localization->BestParticle();
 	SetPosition(particle->GetX(), particle->GetY(), particle->GetYaw(), false);
 }
 

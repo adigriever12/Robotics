@@ -1,10 +1,3 @@
-/* 
- * File:   Particle.h
- * Author: colman
- *
- * Created on June 12, 2015, 12:43 PM
- */
-
 #ifndef PARTICLE_H
 #define	PARTICLE_H
 
@@ -41,32 +34,29 @@ using namespace PlayerCc;
 #define DETECT_EVASION_RADIUS 0.6
 
 class Particle {
-	float _dX;
-	float _dY;
-	float _dYaw;
-	float _dBel;
+	float _X_delta;
+	float _Y_delta;
+	float _Yaw_delta;
+	float _belief;
 	
 	int _lifes;
 	int _age;
 	
-	float Randomize(float dMin, float dMax);
-	float ProbabilityByMovement(float deltaX, float deltaY, float deltaYaw);
-	float ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map, SDL2Wrapper* sdl, LaserProxy* lp, bool shouldDraw);
+	float Random(float min, float max);
+	float ProbabilityByMovement(float X_delta, float Y_delta, float Yaw_delta);
+	float ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_delta, Map* map, SDL2Wrapper* sdl, LaserProxy* lp, bool shouldDraw);
 	
 public:
-	Particle(float dX, float dY, float dYaw, float dBel);
+	Particle(float X_delta, float Y_delta, float Yaw_delta, float belief);
 	virtual ~Particle();
-	
-	Particle* CreateChild();
-	Particle* CreateChild(float dExpansionRadius, float dYawRange);
-	void Update(float dX, float dY, float dYaw, Map* map, SDL2Wrapper* sdl, LaserProxy* lp);
-	void DrawLaserScan(Map* map, SDL2Wrapper* sdl, LaserProxy* lp);
-        
-	float GetX();
+        float GetX();
 	float GetY();
 	float GetYaw();
 	float GetBelif();
-	
+	Particle* CreateChild();
+	Particle* CreateChild(float expansion_radius, float yaw_range);
+	void Update(float X_delta, float Y_delta, float Yaw_delta, Map* map,SDL2Wrapper* sdl, LaserProxy* lp);
+	void DrawLaserScan(Map* map, SDL2Wrapper* sdl, LaserProxy* lp);
 	void IncreaseAge();
 	int Age();
 	void DecreaseLife();

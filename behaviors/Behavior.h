@@ -90,13 +90,13 @@ public:
             {
                 current_angle = ((2 * M_PI) + current_angle);
             }
-            
-            double m = -99;
-            
-            if (target_x != curr_x)
-            {
-                m = (target_y - curr_y) / (target_x - curr_x);
-            }
+//            
+//            double m = -99;
+//            
+//            if (target_x != curr_x)
+//            {
+//                m = (target_y - curr_y) / (target_x - curr_x);
+//            }
             
          //   std::cout << "current angle: " << current_angle << std::endl << std::flush;
           //  std::cout << "target angel: " << target_angle << std::endl << std::flush;
