@@ -49,8 +49,8 @@ int main() {
         vector<MapSearchNode*> filtered_nodes;
         waypointsmanager.GetWayPointNodes(filtered_nodes);
         
-        //for (int blat = 0; blat < filtered_nodes.size(); blat++)
-            //printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
+        for (int blat = 0; blat < filtered_nodes.size(); blat++)
+            printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
         
         SDL2Wrapper sdl;
 	sdl.CreateWindow("World Map", m.GetMapWidth(), m.GetMapHeight());

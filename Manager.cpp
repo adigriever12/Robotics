@@ -46,8 +46,14 @@ void Manager::run(vector<MapSearchNode*> waypoints)
 
                 if (_curr->isAtWaypoint(x, y))
                 {
-                    std::cout << "We have reached (" << x << ", " << y << "), moving to next WP!" << std::endl;
+                    std::cout << "We have reached (" << x << ", " << y << "), moving to next WP! " << i << std::endl;
                     i++;
+                    
+                    if (i == waypoints.size())
+                    {
+                        printf("finished :)");
+                        return;
+                    }
                     
                     _curr->setNextPoint(waypoints[i]->GetX(), waypoints[i]->GetY());
                 }
