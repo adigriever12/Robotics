@@ -7,7 +7,7 @@ Particle::Particle(float X_delta, float Y_delta, float Yaw_delta, float belief)
     _Yaw_delta = Yaw_delta;
     _belief = belief;
 
-    _lifes = PARTICLE_LIFES;
+    _lifes = PARTICLE_LIFES_NUM;
     _age = 1;
 }
 
@@ -53,10 +53,10 @@ void Particle::Update(float X_delta, float Y_delta, float Yaw_delta, Map* map,SD
     _Y_delta += Y_delta;
     _Yaw_delta += Yaw_delta;
 
-    // Calculate new belif value from prediction belif, laser scan and the belif magic number
+    // Calculate new belief value from prediction belif, laser scan and the belif magic number
     float predictionBelif = ProbabilityByMovement(X_delta, Y_delta, Yaw_delta) * _belief;
     float probabilityByScan = ProbabilityByLaserScan(_X_delta, _Y_delta, _Yaw_delta, map, sdl, lp, false);
-    _belief = probabilityByScan * predictionBelif * BELIF_MAGIC_NUMBER;
+    _belief = probabilityByScan * predictionBelif * BELIEF_MAGIC_NUMBER;
     //_dBel = predictionBelif * BELIF_MAGIC_NUMBER;
 
     if (_belief > 1)

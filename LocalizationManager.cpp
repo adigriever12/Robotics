@@ -21,7 +21,7 @@ LocalizationManager::~LocalizationManager() {
 }
 bool LocalizationManager::CreateParticle(float X_delta, float Y_delta, float Yaw_delta, float Belief) 
 {
-	CreateParticle(X_delta, Y_delta, Yaw_delta, Belief, EXPANSION_RADIUS, YAW_RANGE, PARTICLE_HIGH_BREED);
+	CreateParticle(X_delta, Y_delta, Yaw_delta, Belief, EXPANSION_RADIUS, YAW_RANGE, HIGH_BREED);
 }
 bool LocalizationManager::CreateParticle(float X_delta, float Y_delta, float Yaw_delta, float Belief, float Expansion_Radius, float Yaw_Range, int childsCount) 
 {
@@ -58,7 +58,7 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
             float belif = particle->GetBelif();
 
             // Depending on the belif value kill or breed the given particle
-            if (belif <= LOW_BELIF_THRESHOLD) 
+            if (belif <= LOW_BELIEF_MIN) 
             {
                 particle->DecreaseLife();
                 //printf("Particle <%f, %f, %f> belief %f\n", particle->GetX(), particle->GetY(), particle->GetYaw(), particle->GetBelif());
@@ -71,16 +71,16 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
                     childsToRemove.push_back(i);				
                 }
             } 
-            else if (belif >= HIGH_BELIF_THRESHOLD &&
-                     ((particles_size + PARTICLE_HIGH_BREED + childsToAdd.size()) < MAX_PARTICLES_COUNT)) 
+            else if (belif >= HIGH_BELIEF_MIN &&
+                     ((particles_size + HIGH_BREED + childsToAdd.size()) < MAX_PARTICLES_COUNT)) 
             {
                     particle->IncreaseAge();
-                    BreedParticle(particle, PARTICLE_HIGH_BREED, childsToAdd);
+                    BreedParticle(particle, HIGH_BREED, childsToAdd);
             } 
-            else if ((particles_size + PARTICLE_NORMAL_BREED + childsToAdd.size()) < MAX_PARTICLES_COUNT) 
+            else if ((particles_size + NORMAL_BREED + childsToAdd.size()) < MAX_PARTICLES_COUNT) 
             {
                     particle->IncreaseAge();
-                    BreedParticle(particle, PARTICLE_NORMAL_BREED, childsToAdd);
+                    BreedParticle(particle, NORMAL_BREED, childsToAdd);
             }
 	}
 	
