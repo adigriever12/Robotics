@@ -17,13 +17,17 @@
 #include "Robot.h"
 #include "Manager.h"
 #include "Plans/PlnObstacleAvoid.h"
+#include "ConfiguraionManager.h"
 
 using namespace PlayerCc;
 using namespace std;
 
 int main() {
-
-	//Map m("/home/colman/Desktop/hospital_section.png");
+    
+    
+        ConfiguraionManager cnf("/home/colman/Desktop/parameters.txt");
+        cnf.ReadParameters();
+        
         srand (time(NULL));
 	Map m("/home/colman/Desktop/roboticLabMap.png");
 	m.blowMap();
@@ -31,10 +35,10 @@ int main() {
 	m.turnToGrid();
 
 	// TODO:: Read from parameters file later
-	int startX = m.PixleLocationToGrid(305);
-	int startY = m.PixleLocationToGrid(362);
-	int goalX = m.PixleLocationToGrid(138);
-	int goalY = m.PixleLocationToGrid(169);
+	int startX = m.PixleLocationToGrid(ConfiguraionManager::StartLocationX);
+	int startY = m.PixleLocationToGrid(ConfiguraionManager::StartLocationY);
+	int goalX = m.PixleLocationToGrid(ConfiguraionManager::GoalLocationX);
+	int goalY = m.PixleLocationToGrid(ConfiguraionManager::GoalLocationY);
 
 	int** grid = m.GetGrid();
 
@@ -62,7 +66,8 @@ int main() {
         Robot robot("localhost",6665, &localization);
 	PlnObstacleAvoid plnOA(&robot);
         
-        robot.SetOdometryByPixelCoord(362, 305, 20,
+        robot.SetOdometryByPixelCoord(ConfiguraionManager::StartLocationY,
+                ConfiguraionManager::StartLocationX, ConfiguraionManager::StartLocationYAW,
 				m.GetPixelResolution(), m.GetMapWidth(), m.GetMapHeight());
         
         Manager manager(&robot, &plnOA, &sdl);

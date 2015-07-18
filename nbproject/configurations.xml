@@ -28,6 +28,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>ConfiguraionManager.cpp</itemPath>
+      <itemPath>ConfiguraionManager.h</itemPath>
       <itemPath>Convert.h</itemPath>
       <itemPath>Debug.h</itemPath>
       <itemPath>LocalizationManager.cpp</itemPath>
@@ -89,6 +91,10 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="ConfiguraionManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConfiguraionManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Convert.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Debug.h" ex="false" tool="3" flavor2="0">
@@ -190,6 +196,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="ConfiguraionManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ConfiguraionManager.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Convert.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Debug.h" ex="false" tool="3" flavor2="0">

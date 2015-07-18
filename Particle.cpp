@@ -112,8 +112,8 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 	float x = Convert::RobotRelativeXPosToPixelXCoord(dX, resolution, mapWidth);
 	float y = Convert::RobotRelativeYPosToPixelYCoord(dY, resolution, mapHeight);
         
-        int xCoord = floor(x / 4);
-        int yCoord = floor(y / 4);
+        int xCoord = floor(x / (ConfiguraionManager::GetCMInCell()));
+        int yCoord = floor(y / (ConfiguraionManager::GetCMInCell()));
         
 	// Check if current position is a valid position before continue
 	if (x < 0 || (x) >= map->GetMapWidth() ||
@@ -158,8 +158,8 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
                             continue;
 			}
                         
-                        xCoord = floor(dObstacleX / 4);
-                        yCoord = floor(dObstacleY / 4);
+                        xCoord = floor(dObstacleX / (ConfiguraionManager::GetCMInCell()));
+                        yCoord = floor(dObstacleY / (ConfiguraionManager::GetCMInCell()));
                         
                         if (grid[yCoord][xCoord] != 0)
                         {

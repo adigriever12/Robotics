@@ -18,9 +18,14 @@ public:
     {
         //printf("forward free: %u\n", _robot->isForwardFree());
         
-        int calcx = (((550 * 2.5) / 2) + (_robot->GetX() * 100)) / 10;
+        int mapwidth = ConfiguraionManager::MapWidth;
+        int mapheight = ConfiguraionManager::MapHeight;
+        double mapresolution = ConfiguraionManager::MapResolutionCM;
+        int gridresolution = ConfiguraionManager::GridResolutionCM;
+            
+        int calcx = (((mapwidth * mapresolution) / 2) + (_robot->GetX() * 100)) / gridresolution;
         int _realX = ceil(calcx);
-        int calcy = (((380 * 2.5) / 2) - (_robot->GetY() * 100)) / 10;
+        int calcy = (((mapheight * mapresolution) / 2) - (_robot->GetY() * 100)) / gridresolution;
         int _realY = ceil(calcy) * (-1);
 
 //        std::cout << "isAtWayPoint parameters: " << _realX << " " << _realY << std::endl << std::flush;

@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ConfiguraionManager.o \
 	${OBJECTDIR}/LocalizationManager.o \
 	${OBJECTDIR}/Manager.o \
 	${OBJECTDIR}/Map.o \
@@ -78,6 +79,11 @@ LDLIBSOPTIONS=-lplayerc++ `pkg-config --libs SDL2_image` `pkg-config --libs sdl2
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/ConfiguraionManager.o: ConfiguraionManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/local/include/player-2.0 `pkg-config --cflags SDL2_image` `pkg-config --cflags sdl2`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConfiguraionManager.o ConfiguraionManager.cpp
 
 ${OBJECTDIR}/LocalizationManager.o: LocalizationManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}

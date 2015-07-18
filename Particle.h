@@ -14,6 +14,7 @@
 #include <math.h>
 #include "SDL2Wrapper.h"
 #include "Debug.h"
+#include "ConfiguraionManager.h"
 using namespace std;
 
 #include "Map.h"

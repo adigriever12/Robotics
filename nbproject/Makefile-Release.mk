@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/ConfiguraionManager.o \
 	${OBJECTDIR}/LocalizationManager.o \
 	${OBJECTDIR}/Manager.o \
 	${OBJECTDIR}/Map.o \
@@ -78,6 +79,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/robotics-demo ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/ConfiguraionManager.o: ConfiguraionManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConfiguraionManager.o ConfiguraionManager.cpp
 
 ${OBJECTDIR}/LocalizationManager.o: LocalizationManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}

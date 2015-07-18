@@ -71,9 +71,14 @@ public:
         {
             double current_angle = _robot->GetYaw();
 
-            int calcx = (((550 * 2.5) / 2) + _robot->GetX() * 100) / 10;
+            int mapwidth = ConfiguraionManager::MapWidth;
+            int mapheight = ConfiguraionManager::MapHeight;
+            double mapresolution = ConfiguraionManager::MapResolutionCM;
+            int gridresolution = ConfiguraionManager::GridResolutionCM;
+            
+            int calcx = (((mapwidth * mapresolution) / 2) + _robot->GetX() * 100) / gridresolution;
             int curr_x = ceil(calcx);
-            int calcy = (((380 * 2.5) / 2) - _robot->GetY() * 100) / 10;
+            int calcy = (((mapheight * mapresolution) / 2) - _robot->GetY() * 100) / gridresolution;
             int curr_y = ceil(calcy) * (-1);
             int target_x = _NextPointX;
             int target_y = _NextPointY * (-1);
@@ -118,13 +123,18 @@ public:
         
         bool isAtWaypoint(int x, int y)
         {
-            int calcx = (((550 * 2.5) / 2) + _robot->GetX() * 100) / 10;
+            int mapwidth = ConfiguraionManager::MapWidth;
+            int mapheight = ConfiguraionManager::MapHeight;
+            double mapresolution = ConfiguraionManager::MapResolutionCM;
+            int gridresolution = ConfiguraionManager::GridResolutionCM;
+            
+            int calcx = (((mapwidth * mapresolution) / 2) + _robot->GetX() * 100) / gridresolution;
             int curr_x = ceil(calcx);
-            int calcy = (((380 * 2.5) / 2) - _robot->GetY() * 100) / 10;
+            int calcy = (((mapheight * mapresolution) / 2) - _robot->GetY() * 100) / gridresolution;
             int curr_y = ceil(calcy);
             
-            int dX = abs(_NextPointX - curr_x) * 10;
-            int dY = abs((_NextPointY) - curr_y) * 10;
+            int dX = abs(_NextPointX - curr_x) * gridresolution;
+            int dY = abs((_NextPointY) - curr_y) * gridresolution;
 
             //printf("(%d, %d), (%d, %d) Distance to next WP <%u, %u>: %f\n",curr_x, curr_y, _NextPointX, _NextPointY, dX, dY, sqrt((dX * dX) + (dY * dY)));
             return (sqrt((dX * dX) + (dY * dY)) < 20);

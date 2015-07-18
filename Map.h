@@ -10,8 +10,10 @@
 #include <iostream>
 #include <vector>
 #include "lodepng.h"
+#include "ConfiguraionManager.h"
 #include <stdio.h>
 #include <math.h>
+    
 struct Point
 		{
 			int x;
@@ -29,12 +31,9 @@ class Map {
 	int _grid_height;
 	int _grid_width;
 
-
-
-	// TODO:: change later for parameters file
-	int robotSize = 30;
-	double MapResolutionCM = 2.5;
-	int GridResolutionCM = 10;
+	int robotSize = ConfiguraionManager::RobotSize;
+	double MapResolutionCM = ConfiguraionManager::MapResolutionCM;
+	int GridResolutionCM = ConfiguraionManager::GridResolutionCM;
 
 public:
 	int** GetGrid()
@@ -48,15 +47,15 @@ public:
         }
         
         int GetMapWidth()
-        {
-            //return _grid_width;   
-            return 550;
+        { 
+            ConfiguraionManager::SetMapWidth(_width);
+            return _width;
         }
         
         int GetMapHeight()
-        {
-            //return _grid_height;   
-            return 380;
+        { 
+            ConfiguraionManager::SetMapHeight(_height);
+            return _height;
         }
         
 	Map(char* mapname);
