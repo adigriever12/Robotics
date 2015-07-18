@@ -50,9 +50,9 @@ void Robot::SetOdemetry(double dX, double dY, double dYaw) {
 }
 
 void Robot::SetOdometryByPixelCoord(double dX, double dY, double dYaw, double resolution, double mapWidth, double mapHeight) {		
-	SetPosition(Convert::PixelXCoordToRobotRelativeXPos(dX, CM_TO_METERS(resolution), mapWidth),
-				Convert::PixelYCoordToRobotRelativeYPos(dY, CM_TO_METERS(resolution), mapHeight),
-				DTOR(dYaw), true);
+	SetPosition(Convert::PixelToRobotX(dX, CM_TO_METERS(resolution), mapWidth),
+                    Convert::PixelToRobotY(dY, CM_TO_METERS(resolution), mapHeight),
+                    DTOR(dYaw), true);
 
 	_localization->CreateParticle(_dX, _dY, _dYaw, 1);
 }

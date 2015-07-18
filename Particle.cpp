@@ -109,8 +109,8 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 	float mapWidth = map->GetMapWidth();
 	float mapHeight = map->GetMapHeight();
         
-	float x = Convert::RobotRelativeXPosToPixelXCoord(dX, resolution, mapWidth);
-	float y = Convert::RobotRelativeYPosToPixelYCoord(dY, resolution, mapHeight);
+	float x = Convert::RobotToPixelX(dX, resolution, mapWidth);
+	float y = Convert::RobotToPixelY(dY, resolution, mapHeight);
         
         int xCoord = floor(x / (ConfiguraionManager::GetCMInCell()));
         int yCoord = floor(y / (ConfiguraionManager::GetCMInCell()));
@@ -148,8 +148,8 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 			float dObstacleX = dX + range * cos(dYaw + bearing);
 			float dObstacleY = dY + range * sin(dYaw + bearing);
 			
-			dObstacleX = Convert::RobotRelativeXPosToPixelXCoord(dObstacleX, resolution, mapWidth);
-			dObstacleY = Convert::RobotRelativeYPosToPixelYCoord(dObstacleY, resolution, mapHeight);
+			dObstacleX = Convert::RobotToPixelX(dObstacleX, resolution, mapWidth);
+			dObstacleY = Convert::RobotToPixelY(dObstacleY, resolution, mapHeight);
 			
 			// Check bounds before actually trying to get cell
 			if ((dObstacleX) < 0 || (dObstacleX) >= map->GetMapWidth() ||

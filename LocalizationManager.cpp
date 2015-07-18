@@ -16,8 +16,10 @@ LocalizationManager::LocalizationManager(Map* map,  SDL2Wrapper* sdl) {
 }
 
 LocalizationManager::~LocalizationManager() {
-	if (_particles.size() > 0) {
-		for (int i=0; i<_particles.size(); i++) {
+	if (_particles.size() > 0) 
+        {
+		for (int i=0; i < _particles.size(); i++) 
+                {
 			delete _particles[i];
 		}
 		
@@ -77,8 +79,8 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 	bestParticle = GetBestParticle();
 	for (int i=0; i<_particles.size(); i++) {
 		Particle* particle = _particles[i];
-		float dX = Convert::RobotRelativeXPosToPixelXCoord(particle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
-		float dY = Convert::RobotRelativeYPosToPixelYCoord(particle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
+		float dX = Convert::RobotToPixelX(particle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
+		float dY = Convert::RobotToPixelY(particle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
 		if (particle->GetX() == bestParticle->GetX() &&
 				particle->GetY() == bestParticle->GetY() &&
 				particle->GetYaw() == bestParticle->GetYaw() &&
@@ -90,8 +92,8 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 		_sdl->DrawPoint(dX, dY, PURPLE_RGB_FORMAT, 255);
 	}
 	
-	float dX = Convert::RobotRelativeXPosToPixelXCoord(bestParticle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
-	float dY = Convert::RobotRelativeYPosToPixelYCoord(bestParticle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
+	float dX = Convert::RobotToPixelX(bestParticle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
+	float dY = Convert::RobotToPixelY(bestParticle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
 	_sdl->FillRectangle(dX, dY, (double)(4), RED_RGB_FORMAT, 255, false);
 #endif
 	

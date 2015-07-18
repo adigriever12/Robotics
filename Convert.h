@@ -6,60 +6,69 @@
 
 class Convert {
 public:
-	/*
-	 * All pixel coordinates to relative robot positions and vice versa don't scale the given values
-	 * Relative robot and resolution should be in meters
-	 */
-	static float PixelXCoordToRobotRelativeXPos(float dX, float resolution, float mapWidth) {
-		float quarterSize = mapWidth / 2;
+	
+	static float PixelToRobotX(float Xdelta, float resolution, float mapWidth) {
+		float halfSize = mapWidth / 2;
 		
-		if (dX > quarterSize)
-			dX -= quarterSize;
-		else {
-			dX = quarterSize - dX;
-			dX *= -1;			
+		if (Xdelta > halfSize)
+                {
+                    Xdelta -= halfSize;
+                }
+		else 
+                {
+                    Xdelta = halfSize - Xdelta;
+                    Xdelta *= -1;			
 		}
 		
-		return dX * resolution;
+		return Xdelta * resolution;
 	}
 	
-	static float PixelYCoordToRobotRelativeYPos(float dY, float resolution, float mapHeight) {
-		float quarterSize = mapHeight / 2;
+	static float PixelToRobotY(float Ydelta, float resolution, float mapHeight) {
+		float halfSize = mapHeight / 2;
 		
-		if (dY > quarterSize) {
-			dY -= quarterSize;
-			dY *= -1;
-		} else {
-			dY = quarterSize - dY;
+		if (Ydelta > halfSize) 
+                {
+                    Ydelta -= halfSize;
+                    Ydelta *= -1;
+		} 
+                else 
+                {
+                    Ydelta = halfSize - Ydelta;
 		}
 		
-		return dY * resolution;
+		return Ydelta * resolution;
 	}
 	
-	static float RobotRelativeXPosToPixelXCoord(float dX, float resolution, float mapWidth) {
-		double quarterSize = (mapWidth / 2) * resolution;
+	static float RobotToPixelX(float Xdelta, float resolution, float mapWidth) {
+		double halfSize = (mapWidth / 2) * resolution;
 		
-		if (dX > 0)
-			dX += quarterSize;
-		else {
-			dX *= -1;
-			dX = quarterSize - dX;
+		if (Xdelta > 0)
+                {
+                    Xdelta += halfSize;
+                }
+		else 
+                {
+                    Xdelta *= -1;
+                    Xdelta = halfSize - Xdelta;
 		}
 		
-		return dX / resolution;
+		return Xdelta / resolution;
 	}
 	
-	static float RobotRelativeYPosToPixelYCoord(float dY, float resolution, float mapHeight) {
-		float quarterSize = (mapHeight / 2) * resolution;
+	static float RobotToPixelY(float Ydelta, float resolution, float mapHeight) {
+		float halfSize = (mapHeight / 2) * resolution;
 		
-		if (dY < 0) {
-			dY *= -1;
-			dY += quarterSize;
-		} else {
-			dY = quarterSize - dY;
+		if (Ydelta < 0) 
+                {
+                    Ydelta *= -1;
+                    Ydelta += halfSize;
+		} 
+                else 
+                {
+                    Ydelta = halfSize - Ydelta;
 		}
 		
-		return dY / resolution;
+		return Ydelta / resolution;
 	}
 };
 
