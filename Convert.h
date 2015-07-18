@@ -1,9 +1,3 @@
-/* 
- * File:   Convert.h
- * Author: colman
- *
- * Created on June 14, 2015, 4:46 AM
- */
 
 #ifndef CONVERT_H
 #define	CONVERT_H

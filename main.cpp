@@ -33,15 +33,13 @@ int main() {
 	m.blowMap();
 
 	m.turnToGrid();
-
-	// TODO:: Read from parameters file later
+        
 	int startX = m.PixleLocationToGrid(ConfiguraionManager::StartLocationX);
 	int startY = m.PixleLocationToGrid(ConfiguraionManager::StartLocationY);
 	int goalX = m.PixleLocationToGrid(ConfiguraionManager::GoalLocationX);
 	int goalY = m.PixleLocationToGrid(ConfiguraionManager::GoalLocationY);
 
 	int** grid = m.GetGrid();
-
 
 	PathPlanner pathplanner(startX, startY, goalX, goalY, &m);
 
@@ -86,7 +84,7 @@ int main() {
 		int y = filtered_nodes[i]->GetY();
 		grid[y][x] = 5;
 	}
-//
+
 //	for(int i = 0; i < 95; i++)
 //        {
 //            for(int j = 0; j < 138; j++)

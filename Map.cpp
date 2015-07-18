@@ -97,9 +97,9 @@ void Map::turnToGrid()
 				{
 					// in case the cell is black or grey.
 					if (getMatrixValue(i * numOfCells + k, j * numOfCells + l) != WHITE_RGB ||
-						getMatrixValue(i * numOfCells - k, j * numOfCells - l) != WHITE_RGB ||
-						getMatrixValue(i * numOfCells - k, j * numOfCells + l) != WHITE_RGB ||
-						getMatrixValue(i * numOfCells + k, j * numOfCells - l) != WHITE_RGB)
+                                            getMatrixValue(i * numOfCells - k, j * numOfCells - l) != WHITE_RGB ||
+                                            getMatrixValue(i * numOfCells - k, j * numOfCells + l) != WHITE_RGB ||
+                                            getMatrixValue(i * numOfCells + k, j * numOfCells - l) != WHITE_RGB)
 					{
 						is_taken = true;
 					}
@@ -145,6 +145,15 @@ void Map::distributeWeights()
 				setGridWeight(i + 1, j - 1);
 				setGridWeight(i - 1, j + 1);
 				setGridWeight(i - 1, j - 1);
+                                
+                                setGridWeight(i, j + 2);
+				setGridWeight(i, j - 2);
+				setGridWeight(i + 2, j);
+				setGridWeight(i - 2, j);
+				setGridWeight(i + 2, j + 2);
+				setGridWeight(i + 2, j - 2);
+				setGridWeight(i - 2, j + 2);
+				setGridWeight(i - 2, j - 2);
 			}
 		}
 	}
