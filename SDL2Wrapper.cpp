@@ -22,7 +22,7 @@ SDL2Wrapper::~SDL2Wrapper() {
 
 void SDL2Wrapper::CreateWindow(const char* title, int width, int height) {
     if (_window && _renderer) {
-        printf("This wrapper doesn't support multiple windows creation.");
+        //printf("This wrapper doesn't support multiple windows creation.");
         return;
     }
     

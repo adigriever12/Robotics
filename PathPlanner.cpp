@@ -44,9 +44,9 @@ void PathPlanner::GetAStarNodes(vector<MapSearchNode*> &nodesFromStartToGoal)
 			nodesFromStartToGoal.push_back(node);
 		}
 
-		printf("Path made of %d nodes.\n", nodes);
+		//printf("Path made of %d nodes.\n", nodes);
 	} else {
-		printf("Search terminated after. Didn't find goal.\n");
+		//printf("Search terminated after. Didn't find goal.\n");
 	}
 }
 

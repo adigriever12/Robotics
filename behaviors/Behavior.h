@@ -126,7 +126,7 @@ public:
             int dX = abs(_NextPointX - curr_x) * 10;
             int dY = abs((_NextPointY) - curr_y) * 10;
 
-            printf("(%d, %d), (%d, %d) Distance to next WP <%u, %u>: %f\n",curr_x, curr_y, _NextPointX, _NextPointY, dX, dY, sqrt((dX * dX) + (dY * dY)));
+            //printf("(%d, %d), (%d, %d) Distance to next WP <%u, %u>: %f\n",curr_x, curr_y, _NextPointX, _NextPointY, dX, dY, sqrt((dX * dX) + (dY * dY)));
             return (sqrt((dX * dX) + (dY * dY)) < 20);
         }
 };

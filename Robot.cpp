@@ -28,7 +28,7 @@ void Robot::ReadAndUpdateLocalization() {
 }
 
 double Robot::SetPosition(double dX, double dY, double dYaw, bool setOdemetry) {
-    printf("best particle (%f, %f, %f)\n", dX, dY, dYaw);
+    //printf("best particle (%f, %f, %f)\n", dX, dY, dYaw);
     _dX = dX;
     _dY = dY;
     _dYaw = dYaw;

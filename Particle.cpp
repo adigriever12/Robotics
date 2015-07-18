@@ -118,7 +118,7 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 	// Check if current position is a valid position before continue
 	if (x < 0 || (x) >= map->GetMapWidth() ||
 			y < 0 || (y) >= map->GetMapHeight()) {
-            printf("Oops! out of bound! (%f, %f)\n", x, y);
+            //printf("Oops! out of bound! (%f, %f)\n", x, y);
             return 0;
 	}
         
@@ -126,7 +126,7 @@ float Particle::ProbabilityByLaserScan(float dX, float dY, float dYaw, Map* map,
 	
         if (grid[yCoord][xCoord] == 1)
         {
-            printf("obstacle ahead! at (%u, %u) with value:%u\n", yCoord, xCoord, grid[yCoord][xCoord]);
+            //printf("obstacle ahead! at (%u, %u) with value:%u\n", yCoord, xCoord, grid[yCoord][xCoord]);
             return 0;
         }
         

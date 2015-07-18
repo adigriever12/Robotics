@@ -18,7 +18,7 @@ public:
     bool startCond()
     {
         double cost = calc_left_cost();
-	printf("left is free: %u left cost: %f\n", _robot->isLeftFree(), cost);
+	//printf("left is free: %u left cost: %f\n", _robot->isLeftFree(), cost);
         return ((_robot->isLeftFree()) && (abs(cost) < M_PI) && (abs(cost) > (M_PI / 48)));
     }
     

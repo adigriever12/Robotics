@@ -41,9 +41,9 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 		// Depending on the belif value kill or breed the given particle
 		if (belif <= LOW_BELIF_THRESHOLD) {
 			particle->DecreaseLife();
-                        printf("Particle <%f, %f, %f> belief %f\n", particle->GetX(), particle->GetY(), particle->GetYaw(), particle->GetBelif());
+                        //printf("Particle <%f, %f, %f> belief %f\n", particle->GetX(), particle->GetY(), particle->GetYaw(), particle->GetBelif());
 			if (particle->IsDead() || belif <= 0) {
-                            printf("So much death\n");
+                            //printf("So much death\n");
                             //PlayerClient* pc = new PlayerClient("localhost",6665);
                             //Position2dProxy* pp = new Position2dProxy(pc);
                             //pp->SetSpeed(0, 0);
@@ -131,7 +131,7 @@ Particle* LocalizationManager::GetBestParticle() {
 	
 	// Incase no particles found we create new one from last known position
 	if (_particles.empty()) {
-            printf("Out of particles! Making new ones!\n");
+            //printf("Out of particles! Making new ones!\n");
 		CreateParticle(_dX, _dY, _dYaw, 1, EMERGENCY_EXPANSION_RADIUS, EMERGENCY_YAW_RANGE,  PARTICLE_EMERGENCY_BREED);
 		Particle* randomParticle = _particles[rand() % _particles.size()];
 		_dX = randomParticle->GetX();
