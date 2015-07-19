@@ -39,7 +39,7 @@ bool MapSearchNode::GetSuccessors(AStarSearch<MapSearchNode>* aStarSearch, MapSe
     AddSuccessor(GetX(), GetY() + 1, parentX, parentY, aStarSearch);
 
     // Left Cell
-    AddSuccessor(GetX() - 1, GetY(), parentX, parentY, aStarSearch);
+    //AddSuccessor(GetX() - 1, GetY(), parentX, parentY, aStarSearch);
 
     // Right Cell
     AddSuccessor(GetX() + 1, GetY(), parentX, parentY, aStarSearch);

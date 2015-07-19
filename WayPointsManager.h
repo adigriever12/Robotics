@@ -18,6 +18,9 @@ public:
     WayPointsManager(const WayPointsManager& orig);
     virtual ~WayPointsManager();
     void GetWayPointNodes(vector<MapSearchNode*> &filtered_nodes);
+    void NewNodes(vector<MapSearchNode*> &filtered_nodes);
+    void deleteFromVec(vector<MapSearchNode*> &filtered_nodes,vector<MapSearchNode*> &new_nodes, int n);
+    bool IsClose(int x, int y, int x1, int y1);
 private:
     vector<MapSearchNode*> _nodes;
     Map* _map;

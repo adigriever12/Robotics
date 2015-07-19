@@ -155,7 +155,7 @@ float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_d
                 x_coord = floor(obstacle_X / (ConfiguraionManager::GetCMInCell()));
                 y_coord = floor(obstacle_Y / (ConfiguraionManager::GetCMInCell()));
 
-                if (grid[y_coord][x_coord] != 0)
+                if (grid[y_coord][x_coord] == 1)
                 {
                     if (should_draw) 
                     {

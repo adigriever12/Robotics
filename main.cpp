@@ -54,6 +54,15 @@ int main() {
         for (int blat = 0; blat < filtered_nodes.size(); blat++)
             printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
         
+        waypointsmanager.NewNodes(filtered_nodes);
+        
+        //for (int blat = 0; blat < filtered_nodes.size(); blat++)
+          //  printf("Waypoints %u: (%u, %u)\n", blat, filtered_nodes[blat]->GetX(), filtered_nodes[blat]->GetY());
+        
+//        for (int i = 0; i < filtered_nodes.size() - 1; i++) {
+//            if (filtered_nodes[i]->)
+//        }
+        
         SDL2Wrapper sdl;
 	sdl.CreateWindow("World Map", m.GetMapWidth(), m.GetMapHeight());
         
@@ -61,12 +70,17 @@ int main() {
 
         LocalizationManager localization(&m, &sdl);
         
-        Robot robot("localhost",6665, &localization);
+        Robot robot("10.10.245.63",6665, &localization);
 	PlnObstacleAvoid plnOA(&robot);
         
         robot.SetOdometryByPixelCoord(ConfiguraionManager::StartLocationY,
                 ConfiguraionManager::StartLocationX, ConfiguraionManager::StartLocationYAW,
 				m.GetPixelResolution(), m.GetMapWidth(), m.GetMapHeight());
+        
+        
+        printf("%f, %f, %f\n", robot.GetX(), robot.GetY(), robot.GetYaw());
+        
+        
         
         Manager manager(&robot, &plnOA, &sdl);
 	manager.run(filtered_nodes);
@@ -85,12 +99,12 @@ int main() {
 		grid[y][x] = 5;
 	}
 
-//	for(int i = 0; i < 95; i++)
-//        {
-//            for(int j = 0; j < 138; j++)
-//            {
-//		std::cout << grid[i][j] << std::flush;
-//            }
-//            std::cout << "\n" << std::flush;
-//	}
+	for(int i = 0; i < 95; i++)
+        {
+            for(int j = 0; j < 138; j++)
+            {
+		std::cout << grid[i][j] << std::flush;
+            }
+            std::cout << "\n" << std::flush;
+	}
 }

@@ -53,8 +53,7 @@ public:
 	}
         
         void double_mod(double& val)
-        {
-            if (val < 0)
+        {            if (val < 0)
             {
                 val += (2 * M_PI);
             }		
