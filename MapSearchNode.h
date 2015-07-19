@@ -36,22 +36,16 @@ public:
         _y = y;
     }
 
-	// Distance between current node (this.) and the last node (goal)
     float GoalDistanceEstimate(MapSearchNode &nodeGoal);
     
-	// Check if current node (this) is the goal node
-	bool IsGoal(MapSearchNode &nodeGoal);
+    bool IsGoal(MapSearchNode &nodeGoal);
 	
-	// Create and add all possible nodes you can move to from current node
     bool GetSuccessors(AStarSearch<MapSearchNode>* aStarSearch, MapSearchNode* parentNode);
 	
-	// Add new successor (node) - helper method to GetSuccessors
     bool AddSuccessor(int currentX, int currentY, int parentX, int parentY, AStarSearch<MapSearchNode>* aStarSearch);
 	
-	// Get cost to move from current node to the successor (node)
     float GetCost(MapSearchNode &successor);
-	
-	// Same state in our world (grid) is simply when both nodes in the same position
+
     bool IsSameState(MapSearchNode &node);
 };
 

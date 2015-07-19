@@ -1,9 +1,8 @@
 #include "LocalizationManager.h"
 #include <ctime>
 
-LocalizationManager::LocalizationManager(Map* map,  SDL2Wrapper* sdl) {
+LocalizationManager::LocalizationManager(Map* map) {
 	_map = map;
-	_sdl = sdl;
         
 	_X_delta = _Y_delta = _Yaw_delta = 0;
 }
@@ -25,14 +24,8 @@ bool LocalizationManager::CreateParticle(float X_delta, float Y_delta, float Yaw
 }
 bool LocalizationManager::CreateParticle(float X_delta, float Y_delta, float Yaw_delta, float Belief, float Expansion_Radius, float Yaw_Range, int childsCount) 
 {
-	// Create new particle only if not exceeded the max particles allowed
 	if (_particles.size() + childsCount < MAX_PARTICLES_COUNT) 
         {
-            /*
-             * This particle is a special one because we create him without parent
-             * so basically he is the first one and from him we need to breed few
-             * more just to start the natural breeding process.
-             */
             Particle* particle = new Particle(X_delta, Y_delta, Yaw_delta, Belief);
             _particles.push_back(particle);
             vector<Particle*> childs;
@@ -51,13 +44,11 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 	
 	for (int i = 0; i < particles_size; i++) 
         {
-            // Get each particle and update position
             Particle* particle = _particles[i];
-            particle->Update(deltaX, deltaY, deltaYaw, _map,_sdl, lp);
+            particle->Update(deltaX, deltaY, deltaYaw, _map, lp);
 
             float belif = particle->GetBelif();
 
-            // Depending on the belif value kill or breed the given particle
             if (belif <= LOW_BELIEF_MIN) 
             {
                 particle->DecreaseLife();
@@ -84,7 +75,6 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
             }
 	}
 	
-	// Remove the dead particles from the main particles vector
 	if (childsToRemove.size() > 0) 
         {
 		for(int i = childsToRemove.size() - 1; i >=0 ; i--) 
@@ -94,47 +84,14 @@ void LocalizationManager::Update(float deltaX, float deltaY, float deltaYaw, Las
 		}
 	}
 	
-	// Add new particles to the main particles vector
 	if (childsToAdd.size() > 0) 
         {
 		ChildsToParticles(childsToAdd);
 	}
-        
-        Particle* bestParticle;
-#ifdef DRAW_PARTICLES
-	bestParticle = BestParticle();
-	for (int i=0; i<_particles.size(); i++) {
-		Particle* particle = _particles[i];
-		float dX = Convert::RobotToPixelX(particle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
-		float dY = Convert::RobotToPixelY(particle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
-		if (particle->GetX() == bestParticle->GetX() &&
-				particle->GetY() == bestParticle->GetY() &&
-				particle->GetYaw() == bestParticle->GetYaw() &&
-				particle->GetBelif() == bestParticle->GetBelif()) {
-			continue;
-		}
-		
-//		_sdl->FillRectangle(dX, dY, (double)(_map->GetGridResolution() / _map->GetPixelResolution()), PURPLE_RGB_FORMAT, 255, false);
-		_sdl->DrawPoint(dX, dY, PURPLE_RGB_FORMAT, 255);
-	}
-	
-	float dX = Convert::RobotToPixelX(bestParticle->GetX(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapWidth());
-	float dY = Convert::RobotToPixelY(bestParticle->GetY(), CM_TO_METERS(_map->GetPixelResolution()), _map->GetMapHeight());
-	_sdl->FillRectangle(dX, dY, (double)(4), RED_RGB_FORMAT, 255, false);
-#endif
-	
-#ifdef DRAW_BEST_LASER_SCAN
-	bestParticle = BestParticle();
-	bestParticle->DrawLaserScan(_map, _sdl, lp);
-#endif
 }
 
 void LocalizationManager::BreedParticle(Particle* particle, int child_count, vector<Particle*>& childs) 
 {
-	/*
-	 * We don't want to breed only half a family so we won't breed any child
-	 * if their is no more room in our particles vector
-	 */
 	if (_particles.size() + child_count < MAX_PARTICLES_COUNT) 
         {
             for (int i = 0; i < child_count; i++) 
@@ -159,8 +116,6 @@ void LocalizationManager::BreedParticle(Particle* particle, int child_count, flo
 
 Particle* LocalizationManager::BestParticle() 
 {
-	
-	// Incase no particles found we create new one from last known position
 	if (_particles.empty()) 
         {
             //printf("Out of particles! Making new ones!\n");
@@ -186,7 +141,6 @@ Particle* LocalizationManager::BestParticle()
             }
 	}
 	
-	// Save last known position for the best particle
 	_X_delta = best_particle->GetX();
 	_Y_delta = best_particle->GetY();
 	_Yaw_delta = best_particle->GetYaw();

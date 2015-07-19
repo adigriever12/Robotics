@@ -47,15 +47,14 @@ Particle* Particle::CreateChild(float expansion_radius, float yaw_range)
     return new Particle(newX, newY, newYaw, 1);
 }
 
-void Particle::Update(float X_delta, float Y_delta, float Yaw_delta, Map* map,SDL2Wrapper* sdl, LaserProxy* lp) 
+void Particle::Update(float X_delta, float Y_delta, float Yaw_delta, Map* map, LaserProxy* lp) 
 {
     _X_delta += X_delta;
     _Y_delta += Y_delta;
     _Yaw_delta += Yaw_delta;
 
-    // Calculate new belief value from prediction belif, laser scan and the belif magic number
     float predictionBelif = ProbabilityByMovement(X_delta, Y_delta, Yaw_delta) * _belief;
-    float probabilityByScan = ProbabilityByLaserScan(_X_delta, _Y_delta, _Yaw_delta, map, sdl, lp, false);
+    float probabilityByScan = ProbabilityByLaserScan(_X_delta, _Y_delta, _Yaw_delta, map, lp);
     _belief = probabilityByScan * predictionBelif * BELIEF_MAGIC_NUMBER;
     //_dBel = predictionBelif * BELIF_MAGIC_NUMBER;
 
@@ -92,9 +91,8 @@ float Particle::ProbabilityByMovement(float X_delta, float Y_delta, float Yaw_de
 	return 0.1;
 }
 
-float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_delta, Map* map, SDL2Wrapper* sdl, LaserProxy* lp, bool should_draw)
+float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_delta, Map* map, LaserProxy* lp)
 {
-	// Convert relative obstacle position to our valid map position
 	float resolution = (map->GetPixelResolution()) / 100;
 	float map_width = map->GetMapWidth();
 	float map_height = map->GetMapHeight();
@@ -105,7 +103,6 @@ float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_d
         int x_coord = floor(x / (ConfiguraionManager::GetCMInCell()));
         int y_coord = floor(y / (ConfiguraionManager::GetCMInCell()));
         
-	// Check if current position is a valid position before continue
 	if (x < 0 || (x) >= map->GetMapWidth() ||
 	    y < 0 || (y) >= map->GetMapHeight()) 
         {
@@ -136,7 +133,6 @@ float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_d
             {
                 total_hits++;
 			
-                // Calculate obstacle position
                 float bearing = lp->GetBearing(i);
                 float obstacle_X = X_delta + range * cos(Yaw_delta + bearing);
                 float obstacle_Y = Y_delta + range * sin(Yaw_delta + bearing);
@@ -144,7 +140,6 @@ float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_d
                 obstacle_X = Convert::RobotToPixelX(obstacle_X, resolution, map_width);
                 obstacle_Y = Convert::RobotToPixelY(obstacle_Y, resolution, map_height);
 
-                // Check bounds before actually trying to get cell
                 if ((obstacle_X) < 0 || (obstacle_X) >= map->GetMapWidth() ||
                      obstacle_Y < 0 || (obstacle_Y) >= map->GetMapHeight()) 
                 {
@@ -157,20 +152,12 @@ float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_d
 
                 if (grid[y_coord][x_coord] == 1)
                 {
-                    if (should_draw) 
-                    {
-                        sdl->DrawPoint(obstacle_X, obstacle_Y, GREEN_RGB_FORMAT, 255);
-                    }
-//                            printf("Correct hits incremented %f ->", correctHits);
+                    
                     correct_hits++;
 //                            printf("%f\n", correctHits);
                 }
                 else
                 {
-                    if (should_draw) 
-                    {
-                        sdl->DrawPoint(obstacle_X, obstacle_Y, RED_RGB_FORMAT, 255);
-                    }
 //                            printf("Oh noes, no hit at (%u, %u)\n", xCoord, yCoord);
                 }
             }
@@ -179,11 +166,6 @@ float Particle::ProbabilityByLaserScan(float X_delta, float Y_delta, float Yaw_d
 	float accuracy = correct_hits / total_hits;
 //	printf("Particle accuracy: %f\n", accuracy);
 	return accuracy;
-}
-
-void Particle::DrawLaserScan(Map* map, SDL2Wrapper* sdl, LaserProxy* lp) 
-{
-    ProbabilityByLaserScan(GetX(), GetY(), GetYaw(), map, sdl, lp, true);
 }
 
 void Particle::IncreaseAge() 

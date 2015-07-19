@@ -47,7 +47,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Plans/PlnObstacleAvoid.o \
 	${OBJECTDIR}/Plans/TurnLeft.o \
 	${OBJECTDIR}/Robot.o \
-	${OBJECTDIR}/SDL2Wrapper.o \
 	${OBJECTDIR}/WayPointsManager.o \
 	${OBJECTDIR}/behaviors/Behavior.o \
 	${OBJECTDIR}/behaviors/TurnRight.o \
@@ -139,11 +138,6 @@ ${OBJECTDIR}/Robot.o: Robot.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Robot.o Robot.cpp
-
-${OBJECTDIR}/SDL2Wrapper.o: SDL2Wrapper.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SDL2Wrapper.o SDL2Wrapper.cpp
 
 ${OBJECTDIR}/WayPointsManager.o: WayPointsManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}

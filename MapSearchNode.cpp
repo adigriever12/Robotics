@@ -9,7 +9,6 @@
 #include <math.h>
 
 MapSearchNode::~MapSearchNode() {
-	// TODO Auto-generated destructor stub
 }
 
 float MapSearchNode::GoalDistanceEstimate(MapSearchNode &nodeGoal) {

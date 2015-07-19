@@ -10,15 +10,13 @@
 #include "Plans/PlnObstacleAvoid.h"
 #include "Robot.h"
 #include "MapSearchNode.h"
-#include "SDL2Wrapper.h"
 
 class Manager {
 	Behavior* _curr;
 	Robot* _robot;
-        SDL2Wrapper* _sdl;
         
 public:
-	Manager(Robot* robot, Plan* pln, SDL2Wrapper* sdl);
+	Manager(Robot* robot, Plan* pln);
 	void run(vector<MapSearchNode*> waypoints);
 	virtual ~Manager();
 };

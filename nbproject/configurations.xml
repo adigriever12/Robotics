@@ -31,7 +31,6 @@
       <itemPath>ConfiguraionManager.cpp</itemPath>
       <itemPath>ConfiguraionManager.h</itemPath>
       <itemPath>Convert.h</itemPath>
-      <itemPath>Debug.h</itemPath>
       <itemPath>LocalizationManager.cpp</itemPath>
       <itemPath>LocalizationManager.h</itemPath>
       <itemPath>Map.cpp</itemPath>
@@ -42,8 +41,6 @@
       <itemPath>Particle.h</itemPath>
       <itemPath>PathPlanner.cpp</itemPath>
       <itemPath>PathPlanner.h</itemPath>
-      <itemPath>SDL2Wrapper.cpp</itemPath>
-      <itemPath>SDL2Wrapper.h</itemPath>
       <itemPath>WayPointsManager.cpp</itemPath>
       <itemPath>WayPointsManager.h</itemPath>
       <itemPath>fsa.h</itemPath>
@@ -97,8 +94,6 @@
       </item>
       <item path="Convert.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Debug.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="LocalizationManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="LocalizationManager.h" ex="false" tool="3" flavor2="0">
@@ -142,10 +137,6 @@
       <item path="Robot.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Robot.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="SDL2Wrapper.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="SDL2Wrapper.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="WayPointsManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -202,8 +193,6 @@
       </item>
       <item path="Convert.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Debug.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="LocalizationManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="LocalizationManager.h" ex="false" tool="3" flavor2="0">
@@ -247,10 +236,6 @@
       <item path="Robot.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Robot.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="SDL2Wrapper.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="SDL2Wrapper.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="WayPointsManager.cpp" ex="false" tool="1" flavor2="0">
       </item>

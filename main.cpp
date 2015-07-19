@@ -62,15 +62,10 @@ int main() {
 //        for (int i = 0; i < filtered_nodes.size() - 1; i++) {
 //            if (filtered_nodes[i]->)
 //        }
-        
-        SDL2Wrapper sdl;
-	sdl.CreateWindow("World Map", m.GetMapWidth(), m.GetMapHeight());
-        
-        sdl.LoadBackground("/home/colman/Desktop/roboticLabMap2.png", true);
 
-        LocalizationManager localization(&m, &sdl);
+        LocalizationManager localization(&m);
         
-        Robot robot("10.10.245.63",6665, &localization);
+        Robot robot("10.10.245.65",6665, &localization);
 	PlnObstacleAvoid plnOA(&robot);
         
         robot.SetOdometryByPixelCoord(ConfiguraionManager::StartLocationY,
@@ -79,10 +74,8 @@ int main() {
         
         
         printf("%f, %f, %f\n", robot.GetX(), robot.GetY(), robot.GetYaw());
-        
-        
-        
-        Manager manager(&robot, &plnOA, &sdl);
+
+        Manager manager(&robot, &plnOA);
 	manager.run(filtered_nodes);
         
         for(int i = 0; i < nodes.size(); i++)
@@ -99,12 +92,12 @@ int main() {
 		grid[y][x] = 5;
 	}
 
-	for(int i = 0; i < 95; i++)
-        {
-            for(int j = 0; j < 138; j++)
-            {
-		std::cout << grid[i][j] << std::flush;
-            }
-            std::cout << "\n" << std::flush;
-	}
+//	for(int i = 0; i < 95; i++)
+//        {
+//            for(int j = 0; j < 138; j++)
+//            {
+//		std::cout << grid[i][j] << std::flush;
+//            }
+//            std::cout << "\n" << std::flush;
+//	}
 }

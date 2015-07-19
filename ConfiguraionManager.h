@@ -8,9 +8,6 @@
 #ifndef CONFIGURAIONMANAGER_H
 #define	CONFIGURAIONMANAGER_H
 
-// consts
-
-
 #include <string>
 #include <iostream>
 #include <fstream>
